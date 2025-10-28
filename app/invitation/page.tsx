@@ -4,19 +4,21 @@ import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import './invitation.css';
 
-const InvitationPage = () => {
+const InvitationPage: React.FC = () => {
   const [started, setStarted] = useState(false);
   const [showText, setShowText] = useState(false);
-  const carAudioRef = useRef(null);
+  const carAudioRef = useRef<HTMLAudioElement>(null);
 
   const handleStartClick = () => {
     setStarted(true);
-    carAudioRef.current.play();
+    carAudioRef.current?.play(); // optional chaining prevents TS errors
   };
 
   const handleCarEnd = () => {
-    carAudioRef.current.pause();
-    carAudioRef.current.currentTime = 0;
+    if (carAudioRef.current) {
+      carAudioRef.current.pause();
+      carAudioRef.current.currentTime = 0;
+    }
     setShowText(true);
   };
 
@@ -40,28 +42,28 @@ const InvitationPage = () => {
       {started && (
         <motion.div
           className="absolute left-1/2 -translate-x-1/2 text-center z-20 w-full"
-          initial={{ y: "100vh" }}
-          animate={{ y: "-17vh" }}
-          transition={{ duration: 2, ease: "easeInOut" }}
+          initial={{ y: '100vh' }}
+          animate={{ y: '-17vh' }}
+          transition={{ duration: 2, ease: 'easeInOut' }}
           onAnimationComplete={handleCarEnd}
         >
           {/* Car */}
           <motion.img
             src="/top.png"
             alt="Car"
-            className="mx-auto w-48 mb-2 mt-9"
+            className="mx-auto w-48 mb-10"
             initial={{ rotate: 90 }}
             animate={{ rotate: 90 }}
           />
 
           {/* Text rising with car */}
           <motion.div
-            className="text-white font-bold smoky-text"
+            className="text-white font-bold smoky-text mt-10"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.8 }}
+            transition={{ delay: 0.2 }}
           >
-            <h1 className="text-4xl md:text-6xl mb-4 mt-27 tracking-wide">
+            <h1 className="text-4xl md:text-6xl mb-4 tracking-wide">
               🏁 Gentlemen, start your engines!
             </h1>
 
