@@ -1,0 +1,124 @@
+/* =============== BASE CONTAINER =============== */
+.invitation-container {
+  position: relative;
+  overflow: hidden;
+  height: 100vh;
+  width: 100%;
+  background: linear-gradient(180deg, #111 0%, #330000 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* =============== CAR ANIMATION AREA =============== */
+.cars-track {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.car {
+  position: absolute;
+  bottom: 10%;
+  opacity: 0.9;
+  width: 250px;
+  filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.4));
+  z-index: 1;
+}
+
+/* =============== TEXT AREA =============== */
+.text-overlay {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  color: #fff;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 1px;
+  overflow: hidden;
+  clip-path: inset(0 0 100% 0);
+  animation: revealDown 2s ease-in-out forwards;
+}
+
+/* Reveal animation — text slides down like dragged by the car */
+@keyframes revealDown {
+  0% {
+    clip-path: inset(0 0 100% 0);
+  }
+  100% {
+    clip-path: inset(0 0 0% 0);
+  }
+}
+
+/* =============== SMOKY TEXT EFFECT =============== */
+.smoky-text {
+  display: inline-block;
+  position: relative;
+  animation: smokeEffect 2.5s ease-out forwards;
+}
+
+@keyframes smokeEffect {
+  0% {
+    opacity: 0;
+    filter: blur(8px);
+    transform: translateY(-30px);
+  }
+  40% {
+    opacity: 0.6;
+    filter: blur(5px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+/* =============== TEXT STYLING =============== */
+.text-overlay h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.text-overlay p {
+  font-size: 1.3rem;
+  margin: 0.3rem 0;
+}
+
+/* =============== BUTTON =============== */
+button {
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+/* =============== OPTIONAL SMOKE BEHIND CAR =============== */
+@keyframes exhaustSmoke {
+  0% {
+    opacity: 0.7;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-80px) scale(2);
+  }
+}
+
+.smoke {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  width: 30px;
+  height: 30px;
+  background: radial-gradient(circle, rgba(255,255,255,0.8), rgba(200,200,200,0));
+  border-radius: 50%;
+  animation: exhaustSmoke 2s ease-out infinite;
+  z-index: 0;
+}
